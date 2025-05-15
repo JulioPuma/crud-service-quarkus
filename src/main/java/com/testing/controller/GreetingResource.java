@@ -1,4 +1,4 @@
-package com.testing;
+package com.testing.controller;
 
 import jakarta.ws.rs.GET;
 import jakarta.ws.rs.Path;

@@ -1,0 +1,18 @@
+%h2:
+  quarkus:
+    datasource:
+      db-kind: h2
+      username: sa
+      password: sa
+      jdbc:
+        url: jdbc:h2:mem:default;DB_CLOSE_DELAY=-1;DB_CLOSE_ON_EXIT=FALSE
+    hibernate-orm:
+      database:
+        generation: drop-and-create
+      log:
+        sql: true
+        format-sql: true
+    h2:
+      console:
+        enabled: true
+        path: /h2 #http://localhost:8080/h2

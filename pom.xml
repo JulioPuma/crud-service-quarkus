@@ -11,11 +11,14 @@
         <maven.compiler.release>21</maven.compiler.release>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
+
         <quarkus.platform.artifact-id>quarkus-bom</quarkus.platform.artifact-id>
         <quarkus.platform.group-id>io.quarkus.platform</quarkus.platform.group-id>
         <quarkus.platform.version>3.21.4</quarkus.platform.version>
         <skipITs>true</skipITs>
         <surefire-plugin.version>3.5.2</surefire-plugin.version>
+
+        <lombok.version>1.18.36</lombok.version>
     </properties>
 
     <dependencyManagement>
@@ -31,40 +34,97 @@
     </dependencyManagement>
 
     <dependencies>
+
+        <!-- ## QUARKUS ## -->
+        <!-- DevTools/Hot reload -->
         <dependency>
             <groupId>io.quarkus</groupId>
-            <artifactId>quarkus-hibernate-orm-rest-data-panache</artifactId>
+            <artifactId>quarkus-arc</artifactId> <!-- para inyeccion de dependencia, etc-->
         </dependency>
         <dependency>
             <groupId>io.quarkus</groupId>
-            <artifactId>quarkus-rest</artifactId>
+            <artifactId>quarkus-config-yaml</artifactId> <!-- permite que Quarkus lea configuraciones desde application.yaml o application.yml -->
+        </dependency>
+
+        <!-- ## REST EXPOSITION ##-->
+<!--        <dependency>-->
+<!--            <groupId>io.quarkus</groupId>-->
+<!--            <artifactId>quarkus-rest</artifactId>-->
+<!--        </dependency>-->
+<!--        <dependency>-->
+<!--            <groupId>io.quarkus</groupId>-->
+<!--            <artifactId>quarkus-jackson</artifactId> &lt;!&ndash; anotaciones como @JsonIgnore, @JsonProperty, etc &ndash;&gt;-->
+<!--        </dependency>-->
+        <!-- RestEasy: utilizado en proyectos versiones < 3.x -->
+        <dependency>
+            <groupId>io.quarkus</groupId>
+            <artifactId>quarkus-resteasy</artifactId>
         </dependency>
         <dependency>
             <groupId>io.quarkus</groupId>
-            <artifactId>quarkus-jdbc-h2</artifactId>
+            <artifactId>quarkus-resteasy-jackson</artifactId>
+        </dependency>
+
+
+        <!-- ## DATABASE ## -->
+        <!-- HIBERNATE -->
+        <!-- combinacion de dependencias y cuando usarlo -->
+        <!-- quarkus-hibernate-orm + quarkus-hibernate-validator : CRUD tradicional con control manual y validacion-->
+        <!-- quarkus-hibernate-orm-panache : CRUD con menos codigo, mas productivo -->
+        <!-- quarkus-hibernate-orm-panache : Si necesitas una API Rest rapida sin escribir controladores -->
+        <dependency>
+            <groupId>io.quarkus</groupId>
+            <artifactId>quarkus-hibernate-orm</artifactId> <!-- Habilita el soporte de JPA con Hibernate: @Entity, @OneToMany, etc,. EntityManager para guardar y consultar datos-->
         </dependency>
         <dependency>
             <groupId>io.quarkus</groupId>
-            <artifactId>quarkus-rest-client</artifactId>
+            <artifactId>quarkus-hibernate-validator</artifactId> <!--Anotaciones como @NotNull, @Size, @Valid -->
         </dependency>
         <dependency>
             <groupId>io.quarkus</groupId>
-            <artifactId>quarkus-arc</artifactId>
+            <artifactId>quarkus-hibernate-orm-panache</artifactId> <!-- Agrega Panache que simplifica el JPA/Hibernate, Permite evitar usar directamente EntityManager, ej: metodos findById, persist, listAll sin necesidad de implementacion. implements PanacheRepository<Object> -->
         </dependency>
         <dependency>
             <groupId>io.quarkus</groupId>
-            <artifactId>quarkus-rest-client-jackson</artifactId>
+            <artifactId>quarkus-hibernate-orm-rest-data-panache</artifactId> <!-- Genera automaticamente endpoints REST a partir de entidades y repositorios Panache. Ayuda a reducir codigo ya que expone directamente una API completa. Funciona solo con RestEasy -->
         </dependency>
+        <!-- JDBC -->
+        <dependency>
+            <groupId>io.quarkus</groupId>
+            <artifactId>quarkus-jdbc-h2</artifactId> <!-- Permite a quarkus usar el driver JDBC de H2 -->
+        </dependency>
+
+        <!-- ## REST CLIENT ##-->
+<!--        <dependency>-->
+<!--            <groupId>io.quarkus</groupId>-->
+<!--            <artifactId>quarkus-rest-client</artifactId>-->
+<!--        </dependency>-->
+<!--        <dependency>-->
+<!--            <groupId>io.quarkus</groupId>-->
+<!--            <artifactId>quarkus-rest-client-jackson</artifactId>-->
+<!--        </dependency>-->
+
+        <!-- ## SWAGGER/ OPENAPI ## -->
+<!--        <dependency>-->
+<!--            <groupId>io.quarkus</groupId>-->
+<!--            <artifactId>quarkus-smallrye-openapi</artifactId>-->
+<!--        </dependency>-->
+
+        <!-- Lombok -->
+        <dependency>
+            <groupId>org.projectlombok</groupId>
+            <artifactId>lombok</artifactId>
+            <version>${lombok.version}</version>
+            <scope>provided</scope>
+        </dependency>
+
+        <!-- TESTING -->
         <dependency>
             <groupId>io.quarkus</groupId>
             <artifactId>quarkus-junit5</artifactId>
             <scope>test</scope>
         </dependency>
-        <dependency>
-            <groupId>io.rest-assured</groupId>
-            <artifactId>rest-assured</artifactId>
-            <scope>test</scope>
-        </dependency>
+
     </dependencies>
 
     <build>
