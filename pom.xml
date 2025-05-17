@@ -55,15 +55,19 @@
 <!--            <groupId>io.quarkus</groupId>-->
 <!--            <artifactId>quarkus-jackson</artifactId> &lt;!&ndash; anotaciones como @JsonIgnore, @JsonProperty, etc &ndash;&gt;-->
 <!--        </dependency>-->
+        <dependency>
+            <groupId>io.quarkus</groupId>
+            <artifactId>quarkus-rest-jackson</artifactId> <!-- mas completo -->
+        </dependency>
         <!-- RestEasy: utilizado en proyectos versiones < 3.x -->
-        <dependency>
-            <groupId>io.quarkus</groupId>
-            <artifactId>quarkus-resteasy</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>io.quarkus</groupId>
-            <artifactId>quarkus-resteasy-jackson</artifactId>
-        </dependency>
+<!--        <dependency>-->
+<!--            <groupId>io.quarkus</groupId>-->
+<!--            <artifactId>quarkus-resteasy</artifactId>-->
+<!--        </dependency>-->
+<!--        <dependency>-->
+<!--            <groupId>io.quarkus</groupId>-->
+<!--            <artifactId>quarkus-resteasy-jackson</artifactId>-->
+<!--        </dependency>-->
 
 
         <!-- ## DATABASE ## -->
@@ -84,10 +88,10 @@
             <groupId>io.quarkus</groupId>
             <artifactId>quarkus-hibernate-orm-panache</artifactId> <!-- Agrega Panache que simplifica el JPA/Hibernate, Permite evitar usar directamente EntityManager, ej: metodos findById, persist, listAll sin necesidad de implementacion. implements PanacheRepository<Object> -->
         </dependency>
-        <dependency>
-            <groupId>io.quarkus</groupId>
-            <artifactId>quarkus-hibernate-orm-rest-data-panache</artifactId> <!-- Genera automaticamente endpoints REST a partir de entidades y repositorios Panache. Ayuda a reducir codigo ya que expone directamente una API completa. Funciona solo con RestEasy -->
-        </dependency>
+<!--        <dependency>-->
+<!--            <groupId>io.quarkus</groupId>-->
+<!--            <artifactId>quarkus-hibernate-orm-rest-data-panache</artifactId> &lt;!&ndash; Genera automaticamente endpoints REST a partir de entidades y repositorios Panache. Ayuda a reducir codigo ya que expone directamente una API completa. Funciona solo con RestEasy &ndash;&gt;-->
+<!--        </dependency>-->
         <!-- JDBC -->
         <dependency>
             <groupId>io.quarkus</groupId>
@@ -95,14 +99,14 @@
         </dependency>
 
         <!-- ## REST CLIENT ##-->
-<!--        <dependency>-->
-<!--            <groupId>io.quarkus</groupId>-->
-<!--            <artifactId>quarkus-rest-client</artifactId>-->
-<!--        </dependency>-->
-<!--        <dependency>-->
-<!--            <groupId>io.quarkus</groupId>-->
-<!--            <artifactId>quarkus-rest-client-jackson</artifactId>-->
-<!--        </dependency>-->
+        <dependency>
+            <groupId>io.quarkus</groupId>
+            <artifactId>quarkus-rest-client</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>io.quarkus</groupId>
+            <artifactId>quarkus-rest-client-jackson</artifactId>
+        </dependency>
 
         <!-- ## SWAGGER/ OPENAPI ## -->
 <!--        <dependency>-->
