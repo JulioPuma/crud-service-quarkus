@@ -1,82 +1,68 @@
-# crud-service-quarkus
+# crud-service-quarkus (branch: with-quarkusrest)
 
-This project uses Quarkus, the Supersonic Subatomic Java Framework.
+Este proyecto es una base para futuros desarrollos de servicios CRUD usando **Quarkus 3** y **Java 21**. Su objetivo es servir como plantilla para exponer servicios REST de manera sencilla y eficiente, aprovechando las capacidades de Quarkus y buenas prácticas de desarrollo.
 
-If you want to learn more about Quarkus, please visit its website: <https://quarkus.io/>.
+## Características principales
 
-## Running the application in dev mode
+- **Quarkus 3** como framework principal.
+- **Java 21** como versión del JDK.
+- Exposición de servicios REST usando la dependencia `quarkus-rest-jackson`.
+- Simulación de base de datos en memoria (sin motor externo).
+- Uso de **Lombok** para reducir el boilerplate en los modelos.
+- Estructura lista para extender y adaptar a nuevos proyectos.
 
-You can run your application in dev mode that enables live coding using:
+## Estructura del proyecto
 
-```shell script
+- `com.quarkus.controller.ClientController`: Controlador REST para operaciones CRUD sobre clientes.
+- `com.quarkus.service.ClientService`: Lógica de negocio y acceso a datos.
+- `com.quarkus.database.Database`: Simulación de base de datos en memoria usando una lista de clientes.
+- `com.quarkus.model.api.Client`: Modelo de datos para clientes.
+
+## Dependencias principales
+
+- `quarkus-rest-jackson`: Permite exponer servicios REST y serializar/deserializar JSON de manera sencilla.
+- `lombok`: Facilita la generación automática de getters, setters, builders, etc.
+- `quarkus-config-yaml`: Permite la configuración del proyecto usando archivos YAML.
+
+## Ejecución en modo desarrollo
+
+Puedes ejecutar la aplicación en modo desarrollo (hot reload) con:
+
+```shell
 ./mvnw quarkus:dev
 ```
+La API estará disponible en http://localhost:9091/clients (puerto configurado en application.yaml).
 
-> **_NOTE:_**  Quarkus now ships with a Dev UI, which is available in dev mode only at <http://localhost:8080/q/dev/>.
+## Endpoints REST
+- `GET /clients` — Listar todos los clientes.
+- `GET /clients/{id}` — Obtener cliente por ID.
+- `POST /clients` — Crear un nuevo cliente.
+- `PUT /clients` — Actualizar un cliente existente.
+- `DELETE /clients/{id}` — Eliminar un cliente por ID.
+  
+## Simulación de base de datos
+  No se utiliza ningún motor de base de datos externo. Los datos se almacenan en una lista en memoria (Database.java), lo que facilita pruebas y prototipado rápido.
 
-## Packaging and running the application
+## Configuración
+La configuración principal se encuentra en src/main/resources/application.yaml, donde puedes ajustar el puerto HTTP y los niveles de log.
 
-The application can be packaged using:
+## Requisitos
+- Java 21
+- Maven 3.8+
 
-```shell script
+## Empaquetado y ejecución
+Para empaquetar la aplicación y crear un JAR ejecutable, utiliza:
+
+```shell
 ./mvnw package
 ```
 
-It produces the `quarkus-run.jar` file in the `target/quarkus-app/` directory.
-Be aware that it’s not an _über-jar_ as the dependencies are copied into the `target/quarkus-app/lib/` directory.
+Luego, puedes ejecutar el JAR generado con:
 
-The application is now runnable using `java -jar target/quarkus-app/quarkus-run.jar`.
-
-If you want to build an _über-jar_, execute the following command:
-
-```shell script
-./mvnw package -Dquarkus.package.jar.type=uber-jar
+```shell
+java -jar target/quarkus-app/quarkus-run.jar
 ```
 
-The application, packaged as an _über-jar_, is now runnable using `java -jar target/*-runner.jar`.
+## Extensión y adaptación
 
-## Creating a native executable
-
-You can create a native executable using:
-
-```shell script
-./mvnw package -Dnative
-```
-
-Or, if you don't have GraalVM installed, you can run the native executable build in a container using:
-
-```shell script
-./mvnw package -Dnative -Dquarkus.native.container-build=true
-```
-
-You can then execute your native executable with: `./target/crud-service-quarkus-1.0.0-SNAPSHOT-runner`
-
-If you want to learn more about building native executables, please consult <https://quarkus.io/guides/maven-tooling>.
-
-## Related Guides
-
-- REST resources for Hibernate ORM with Panache ([guide](https://quarkus.io/guides/rest-data-panache)): Generate Jakarta REST resources for your Hibernate Panache entities and repositories
-- REST ([guide](https://quarkus.io/guides/rest)): A Jakarta REST implementation utilizing build time processing and Vert.x. This extension is not compatible with the quarkus-resteasy extension, or any of the extensions that depend on it.
-- JDBC Driver - H2 ([guide](https://quarkus.io/guides/datasource)): Connect to the H2 database via JDBC
-- REST Client ([guide](https://quarkus.io/guides/rest-client)): Call REST services
-
-## Provided Code
-
-### REST Data with Panache
-
-Generating Jakarta REST resources with Panache
-
-[Related guide section...](https://quarkus.io/guides/rest-data-panache)
-
-
-### REST Client
-
-Invoke different services through REST with JSON
-
-[Related guide section...](https://quarkus.io/guides/rest-client)
-
-### REST
-
-Easily start your REST Web Services
-
-[Related guide section...](https://quarkus.io/guides/getting-started-reactive#reactive-jax-rs-resources)
+Este proyecto está diseñado para ser extendido fácilmente, permitiendo agregar nuevas entidades, servicios y controladores según las necesidades de futuros proyectos.
