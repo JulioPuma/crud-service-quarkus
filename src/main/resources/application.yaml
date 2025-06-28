@@ -1,0 +1,16 @@
+quarkus:
+  http:
+    port: 9091
+  log:
+    level: INFO
+    category:
+      "com.quarkus.database":
+        level: TRACE
+      "com.quarkus.controller":
+        level: DEBUG
+      "com.quarkus.service":
+        level: DEBUG
+    console:
+      enabled: true
+      level: TRACE
+      format: "%d{yyyy-MM-dd HH:mm:ss} %-5p [%c{2.}] (%t) %s%e%n"
