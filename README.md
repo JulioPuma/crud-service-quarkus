@@ -1,68 +1,104 @@
-# crud-service-quarkus (branch: with-quarkusrest)
+## 🚀 CRUD Service Quarkus
+Este proyecto demuestra cómo implementar operaciones CRUD en Java usando Quarkus, integrando diferentes formas tradicionales de acceso a la base de datos y buenas prácticas modernas de desarrollo.
+<hr></hr>
 
-Este proyecto es una base para futuros desarrollos de servicios CRUD usando **Quarkus 3** y **Java 21**. Su objetivo es servir como plantilla para exponer servicios REST de manera sencilla y eficiente, aprovechando las capacidades de Quarkus y buenas prácticas de desarrollo.
+## 📚 Descripción
+El objetivo principal es mostrar tres formas clásicas de interactuar con la capa de persistencia en Java:
+- **PanacheEntityBase**
+- **PanacheRepository**
+- **EntityManager (JPA estándar)**
 
-## Características principales
+Además, se utilizan herramientas modernas como Lombok y MapStruct para reducir el código repetitivo y facilitar el mapeo de objetos.
 
-- **Quarkus 3** como framework principal.
-- **Java 21** como versión del JDK.
-- Exposición de servicios REST usando la dependencia `quarkus-rest-jackson`.
-- Simulación de base de datos en memoria (sin motor externo).
-- Uso de **Lombok** para reducir el boilerplate en los modelos.
-- Estructura lista para extender y adaptar a nuevos proyectos.
+<hr></hr>
 
-## Estructura del proyecto
+## 🛠️ Tecnologías y dependencias principales
+- **Quarkus**: Framework principal para aplicaciones Java nativas y eficientes.
+- **H2 Database**: Base de datos embebida para pruebas y desarrollo rápido.
+- **Hibernate ORM**: Implementación de JPA para el mapeo objeto-relacional.
+- **Panache**: Abstracción sobre JPA que simplifica el acceso a datos.
+- **Lombok**: Generación automática de getters, setters, constructores, etc.
+- **MapStruct**: Mapeo automático entre entidades y DTOs.
 
-- `com.quarkus.controller.ClientController`: Controlador REST para operaciones CRUD sobre clientes.
-- `com.quarkus.service.ClientService`: Lógica de negocio y acceso a datos.
-- `com.quarkus.database.Database`: Simulación de base de datos en memoria usando una lista de clientes.
-- `com.quarkus.model.api.Client`: Modelo de datos para clientes.
-
-## Dependencias principales
-
-- `quarkus-rest-jackson`: Permite exponer servicios REST y serializar/deserializar JSON de manera sencilla.
-- `lombok`: Facilita la generación automática de getters, setters, builders, etc.
-- `quarkus-config-yaml`: Permite la configuración del proyecto usando archivos YAML.
-
-## Ejecución en modo desarrollo
-
-Puedes ejecutar la aplicación en modo desarrollo (hot reload) con:
-
-```shell
-./mvnw quarkus:dev
+Fragmento relevante del pom.xml:
 ```
-La API estará disponible en http://localhost:9091/clients (puerto configurado en application.yaml).
+<!-- Quarkus REST -->
+<dependency>
+    <groupId>io.quarkus</groupId>
+    <artifactId>quarkus-rest-jackson</artifactId>
+</dependency>
 
-## Endpoints REST
-- `GET /clients` — Listar todos los clientes.
-- `GET /clients/{id}` — Obtener cliente por ID.
-- `POST /clients` — Crear un nuevo cliente.
-- `PUT /clients` — Actualizar un cliente existente.
-- `DELETE /clients/{id}` — Eliminar un cliente por ID.
-  
-## Simulación de base de datos
-  No se utiliza ningún motor de base de datos externo. Los datos se almacenan en una lista en memoria (Database.java), lo que facilita pruebas y prototipado rápido.
+<!-- Hibernate ORM (JPA) -->
+<dependency>
+    <groupId>io.quarkus</groupId>
+    <artifactId>quarkus-hibernate-orm</artifactId>
+</dependency>
 
-## Configuración
-La configuración principal se encuentra en src/main/resources/application.yaml, donde puedes ajustar el puerto HTTP y los niveles de log.
+<!-- Panache ORM -->
+<dependency>
+    <groupId>io.quarkus</groupId>
+    <artifactId>quarkus-hibernate-orm-panache</artifactId>
+</dependency>
 
-## Requisitos
-- Java 21
-- Maven 3.8+
+<!-- H2 Database -->
+<dependency>
+    <groupId>io.quarkus</groupId>
+    <artifactId>quarkus-jdbc-h2</artifactId>
+</dependency>
 
-## Empaquetado y ejecución
-Para empaquetar la aplicación y crear un JAR ejecutable, utiliza:
+<!-- Lombok -->
+<dependency>
+    <groupId>org.projectlombok</groupId>
+    <artifactId>lombok</artifactId>
+    <version>${lombok.version}</version>
+    <scope>provided</scope>
+</dependency>
 
-```shell
-./mvnw package
+<!-- MapStruct -->
+<dependency>
+    <groupId>org.mapstruct</groupId>
+    <artifactId>mapstruct</artifactId>
+    <version>${mapstruct.version}</version>
+</dependency>
 ```
+<hr></hr>
 
-Luego, puedes ejecutar el JAR generado con:
+## 🏗️ Estructura del proyecto
+- `/model` 
+  - entity: Entidades JPA (anotadas para generación automática de tablas)
+  - api: DTOs para la API
+  - mapper: Interfaces de mapeo con MapStruct
+- `/service`
+  - dao: Lógica de acceso a datos, eligiendo el modo de persistencia
+  - entitymanager: Implementación usando EntityManager
+  - repository: Implementación usando PanacheRepository
+- `/controller`: Exposición de endpoints REST
+- `/config`: Configuración de propiedades de la aplicación
+- `/util`: Utilidades y enums
+<hr></hr>
 
-```shell
-java -jar target/quarkus-app/quarkus-run.jar
-```
+## 🧩 Modos de persistencia soportados
+Puedes elegir el modo de persistencia cambiando la propiedad `application.crud-mode` en el archivo de configuración:
+- **PANACHE_ENTITY**
+- **PANACHE_REPOSITORY**
+- **ENTITY_MANAGER**
 
-## Extensión y adaptación
+<hr></hr>
 
-Este proyecto está diseñado para ser extendido fácilmente, permitiendo agregar nuevas entidades, servicios y controladores según las necesidades de futuros proyectos.
+## ⚡ ¿Cómo funciona?
+1. El controlador expone endpoints REST para operaciones CRUD.
+2. El servicio selecciona dinámicamente el modo de persistencia según la configuración.
+3. El DAO implementa la lógica para cada modo (PanacheEntityBase, PanacheRepository, EntityManager).
+4. Se usan MapStruct y Lombok para simplificar el código y el mapeo de datos.
+<hr></hr>
+
+## 📝 Notas
+- Este proyecto es ideal para aprender y comparar diferentes formas de acceso a datos en Quarkus.
+- Puedes cambiar fácilmente el modo de persistencia para experimentar con cada enfoque.
+<hr></hr>
+
+## ✨ Autor
+Desarrollado por Julio Pumahuacre
+<hr></hr>
+¿Listo para probar diferentes formas de hacer CRUD en Quarkus? ¡Explora, aprende y experimenta! 🚦
+<hr></hr>

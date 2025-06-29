@@ -1,0 +1,23 @@
+quarkus:
+  # JDBC URL
+  datasource:
+    db-kind: h2
+    jdbc:
+      url: jdbc:h2:mem:mi_db;DB_CLOSE_DELAY=-1
+      #url: jdbc:h2:tcp://localhost/~/bd/mi_db;DB_CLOSE_DELAY=-1 # Previamente crear la base de datos realizando lo sgte: crear archivo "C:\Users\<usuario>\bd\mi_db.mv.db", al crear el archivo, el user y contraseña son vacias.
+      #url: jdbc:h2:file:./data/mi_db;DB_CLOSE_DELAY=-1;AUTO_SERVER=TRUE # Para persistencia en disco, limpiar la carpeta "data" (si existe) antes de iniciar
+      driver: org.h2.Driver
+      username:
+      password:
+  # Habilitar el schema generation
+  hibernate-orm:
+    dialect: org.hibernate.dialect.H2Dialect
+    log:
+      sql: false
+    database:
+      generation: drop-and-create
+  # H2 Console: quarkus-h2-console ya no funciona en Quarkus 3.0. para ver los datos, ejecutar el H2 Console oficial manualmente, o usar herramientas externas como DBeaver, DataGrip o el propio h2-1.4.200.jar en modo servidor.
+#  h2:
+#    console:
+#      enabled: true
+#      path: /h2-console

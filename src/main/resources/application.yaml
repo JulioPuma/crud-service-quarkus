@@ -1,17 +1,17 @@
 quarkus:
+  profile:
+    - h2 # Perfil activo para la base de datos H2
   http:
     port: 9091
   log:
     level: INFO
     category:
-      "com.quarkus.database":
+      "com.quarkusdemo":
         level: TRACE
-      "com.quarkus.controller":
-        level: DEBUG
-      "com.quarkus.service":
-        level: DEBUG
     console:
       enabled: true
       level: TRACE
       format: "%d{yyyy-MM-dd HH:mm:ss} %-5p [%c{2.}] (%t) %s%e%n"
 
+application:
+  crud-mode: PANACHE_ENTITY # Modo de operación del CRUD, puede ser: PANACHE_ENTITY | PANACHE_REPOSITORY | ENTITY_MANAGER
