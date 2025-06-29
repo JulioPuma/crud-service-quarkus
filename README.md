@@ -44,8 +44,7 @@ Cada ejemplo se encuentra en una **rama distinta**, estructurado para facilitar 
 |:----------:|--------------------|----------------------------------------------------------|----------------------------------------------------|
 |     ✔️     | `with-quarkusrest` | Uso de `quarkus-rest` como reemplazo moderno de RESTEasy | `quarkus-rest`, `quarkus-jackson`                  |
 |     ✔️     | `with-resteasy`    | Exposición de endpoints usando `quarkus-resteasy`        | `quarkus-resteasy`                                 |
-|     🕐     | `with-jdbc`        | Exposición de endpoints y conexión con base de datos     | `quarkus-jdbc-h2`                                 |
-|     🕐     | `with-panache`     | Persistencia usando Panache con base de datos en memoria | `quarkus-hibernate-orm-panache`, `quarkus-jdbc-h2` |
+|     ✔️     | `with-jdbc`        | Exposición de endpoints y conexión con base de datos     | `quarkus-jdbc-h2`, `quarkus-hibernate-orm-panache` |
 |     🕐     | `with-kafka`       | Integración con Apache Kafka y eventos reactivos         | `quarkus-smallrye-reactive-messaging-kafka`        |
 |     🕐     | `with-security`    | Seguridad con JWT y autenticación OIDC                   | `quarkus-oidc`, `quarkus-security`                 |
 
