@@ -40,14 +40,14 @@ Cada ejemplo se encuentra en una **rama distinta**, estructurado para facilitar 
 
 ## 🧪 ¿Qué encontrarás en cada rama?
 
-| Disponible | Rama               | Descripción breve                                        | Dependencias clave                                 |
-|:----------:|--------------------|----------------------------------------------------------|----------------------------------------------------|
-|     ✔️     | `with-quarkusrest` | Uso de `quarkus-rest` como reemplazo moderno de RESTEasy | `quarkus-rest`, `quarkus-jackson`                  |
-|     ✔️     | `with-resteasy`    | Exposición de endpoints usando `quarkus-resteasy`        | `quarkus-resteasy`                                 |
-|     🕐     | `with-jdbc`        | Exposición de endpoints y conexión con base de datos     | `quarkus-jdbc-h2`                                 |
-|     🕐     | `with-panache`     | Persistencia usando Panache con base de datos en memoria | `quarkus-hibernate-orm-panache`, `quarkus-jdbc-h2` |
-|     🕐     | `with-kafka`       | Integración con Apache Kafka y eventos reactivos         | `quarkus-smallrye-reactive-messaging-kafka`        |
-|     🕐     | `with-security`    | Seguridad con JWT y autenticación OIDC                   | `quarkus-oidc`, `quarkus-security`                 |
+| Disponible | Rama                       | Descripción breve                                        | Dependencias clave                                   |
+|:----------:|----------------------------|----------------------------------------------------------|------------------------------------------------------|
+|     ✔️     | `with-quarkusrest`         | Uso de `quarkus-rest` como reemplazo moderno de RESTEasy | `quarkus-rest`, `quarkus-jackson`                    |
+|     ✔️     | `with-resteasy`            | Exposición de endpoints usando `quarkus-resteasy`        | `quarkus-resteasy`                                   |
+|     ✔️     | `with-jdbc`                | Exposición de endpoints y conexión con base de datos     | `quarkus-jdbc-h2`, `quarkus-hibernate-orm-panache`   |
+|     ✔️     | `with-quarkus-rest-client` | Consumo de endpoints usando `quarkus-rest-client`        | `quarkus-rest-client`, `quarkus-rest-client-jackson` |
+|     🕐     | `with-kafka`               | Integración con Apache Kafka y eventos reactivos         | `quarkus-smallrye-reactive-messaging-kafka`          |
+|     🕐     | `with-security`            | Seguridad con JWT y autenticación OIDC                   | `quarkus-oidc`, `quarkus-security`                   |
 
 ---
 
@@ -60,6 +60,8 @@ Cada ejemplo se encuentra en una **rama distinta**, estructurado para facilitar 
 - `quarkus-resteasy` (para crear servicios REST con JAX-RS)
 - `quarkus-resteasy-jackson` (para serialización/deserialización JSON
 - `quarkus-jackson` (para soporte de JSON en Quarkus) 
+- `quarkus-rest-client` (para consumir servicios REST externos)
+- `quarkus-rest-client-jackson` (para serialización/deserialización JSON en clientes REST)
 - `quarkus-hibernate-orm-panache` (para simplificar la persistencia con JPA) 
 - `quarkus-jdbc-h2` (para usar una base de datos H2 en memoria) 
 - `quarkus-smallrye-reactive-messaging-kafka` (para integrar con Apache Kafka) 
