@@ -6,7 +6,7 @@ quarkus:
   log:
     level: INFO
     category:
-      "com.quarkusdemo":
+      "com.quarkus":
         level: TRACE
     console:
       enabled: true
