@@ -14,4 +14,20 @@ quarkus:
       enabled: true
       level: TRACE
       format: "%d{yyyy-MM-dd HH:mm:ss} %-5p [%c{2.}] (%t) %s%e%n"
+  rest-client:
+    third-party-api:
+      url: "http://localhost:${quarkus.http.port}"
+      scope: "javax.inject.Singleton"                   # Scope CDI del cliente, ej. javax.inject.Singleton o javax.enterprise.context.ApplicationScoped.
+      connect-timeout: 3000                             # Timeout para establecer la conexión HTTP.
+      read-timeout: 8000                                # Timeout para leer la respuesta.
+  #    providers:                                       # Lista de clases proveedoras (ej. filtros, interceptores JAX-RS).
+  #      - com.ejemplo.MyCustomProvider
+  #    followRedirects: true                            # Si debe seguir redirecciones HTTP 3xx.
+  #    proxyAddress: my.proxy.com:8080                  # Proxy para las conexiones HTTP.
+  #    disableSslVerification: false                    # Si se debe desactivar la verificación SSL.
+  #    trustStore: /path/to/truststore                  # Ruta del truststore (para certificados SSL).
+  #    trustStorePassword: secret                       # 	Contraseña del truststore.
+  #    keyStore: /path/to/keystore                      # Ruta del keystore (para cliente mutual TLS).
+  #    keyStorePassword: secret                         # Contraseña del keystore.
+  #    hostnameVerifier: com.ejemplo.MyHostNameVerifier # Clase HostnameVerifier personalizada.
 

@@ -37,6 +37,12 @@
             <artifactId>quarkus-rest-jackson</artifactId>
         </dependency>
 
+        <!-- ## REST CLIENT ##-->
+        <dependency>
+            <groupId>io.quarkus</groupId>
+            <artifactId>quarkus-rest-client-jackson</artifactId>
+        </dependency>
+
         <!-- ## TOOLS ## -->
         <!-- Lombok -->
         <dependency>

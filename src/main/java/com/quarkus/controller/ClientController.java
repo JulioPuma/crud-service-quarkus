@@ -2,11 +2,15 @@ package com.quarkus.controller;
 
 
 import com.quarkus.model.api.Client;
+import com.quarkus.restclient.ClientThirdPartyRestClient;
 import com.quarkus.service.ClientService;
 import jakarta.inject.Inject;
 import jakarta.ws.rs.*;
 import jakarta.ws.rs.core.Response;
 import jakarta.ws.rs.core.MediaType;
+import lombok.extern.slf4j.Slf4j;
+import org.eclipse.microprofile.rest.client.inject.RestClient;
+
 import java.util.Collection;
 import java.util.Optional;
 
@@ -17,43 +21,39 @@ import java.util.Optional;
 @Path("/clients")
 @Produces(MediaType.APPLICATION_JSON)
 @Consumes(MediaType.APPLICATION_JSON)
+@Slf4j
 public class ClientController {
-  
+
   @Inject
-  ClientService clientService;
+  @RestClient
+  ClientThirdPartyRestClient clientThirdPartyRestClient;
   
   @GET
   public Collection<Client> getAll() {
-    return clientService.getAll();
+    log.info("Fetching all clients from third-party service");
+    return clientThirdPartyRestClient.getAll();
   }
   
   @GET
   @Path("/{id}")
   public Response getById(@PathParam("id") long id) {
-    Optional<Client> optionalClient = clientService.getById(id);
-    if (optionalClient.isEmpty()) {
-      return Response.status(Response.Status.NOT_FOUND).build();
-    }
-    return Response.ok(optionalClient.get()).build();
+    return clientThirdPartyRestClient.getById(id);
   }
   
   @POST
   public Response create(Client client) {
-    Client clientCreated = clientService.create(client);
-    return Response.status(Response.Status.CREATED)
-      .entity(clientCreated).build();
+    return clientThirdPartyRestClient.create(client);
   }
   
   @PUT
   public Response update(Client client) {
-    return Response.ok(clientService.update(client)).build();
+    return clientThirdPartyRestClient.update(client);
   }
   
   @DELETE
   @Path("/{id}")
   public Response delete(@PathParam("id") long id) {
-    clientService.delete(id);
-    return Response.noContent().build();
+    return clientThirdPartyRestClient.delete(id);
   }
 
 }
